@@ -126,7 +126,7 @@
 #tagsList > div::before {
     align-items: flex-end;
     content: "";
-    background-image: url("Images/tag.svg");
+    background-image: url("../Images/tag.svg");
     background-repeat: no-repeat;
     color: #1d1f20;
     display: flex;
