@@ -1,0 +1,178 @@
+
+/*------------------ NoteList ---------------------*/
+
+#noteCount p, #archiveNoteCount p, #tagsCount p {
+    margin: 0.5rem 0;
+}
+
+.notes-list-group {
+    overflow-y: scroll;
+    max-height: 480px;
+}
+
+.notes-list-group .list-group-item {
+    margin-bottom: 10px;
+    border-radius: 1rem !important;
+}
+
+.bi-arrow-up {
+    font-size: 1.5rem;
+    color: red;
+}
+
+.bi-dash {
+    font-size: 1.5rem;
+    color: orange;
+}
+
+.bi-arrow-down {
+    font-size: 1.5rem;
+    color: #1453b7;
+}
+
+.list-group-item .time {
+    max-width: 140px;
+}
+
+.list-group-item p {
+    font-size: 0.9rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Maximale Anzahl von Zeilen, die angezeigt werden sollen */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.list-group-item.active {
+    background-color: var(--color-secondary);
+    border-color: var(--color-secondary);
+}
+
+.list-group-item.active .noteTags {
+    color: var(--color-text);
+}
+.list-header{
+    flex-grow: 1;
+    max-width: 90%;
+}
+
+.noteTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+
+.noteTags small {
+    background-color: var(--color-tag);
+    padding: 5px 10px;
+    border-radius: 2rem;
+}
+
+/*------------------ TagList ---------------------*/
+
+.tagRow {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    align-items: center;
+    grid-gap: 10px; /* Abstand zwischen den Elementen */
+    margin: 1rem 0;
+}
+
+.tagRow span {
+    color: var(--color-text);
+    font-size: 1.2rem;
+}
+
+.btn-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Abstand zwischen den Buttons */
+}
+
+.btn-container button {
+    flex: 1; /* Alle Buttons nehmen gleich viel Platz ein */
+}
+
+
+#tagsList {
+    padding: 0 1rem;
+}
+#tagsList > div {
+    background: white;
+    border-radius: 0 0.5rem 0.5rem 0.5rem;
+    margin-top: 1rem;
+    min-height: 3rem;
+    padding: 1rem 2rem 1rem 3rem;
+    position: relative;
+}
+#tagsList > div::before,
+#tagsList > div::after {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    border-radius: 1rem 1rem 0 1rem;
+    content: "";
+    height: 3rem;
+    left: -1rem;
+    overflow: hidden;
+    position: absolute;
+    top: 0; /* Anfangsposition */
+    width: 3rem;
+    transition: top 0.3s ease; /* Übergang für die Animation */
+}
+
+#tagsList > div:hover::before,
+#tagsList > div:hover::after {
+    top: -1rem; /* Neue Position beim Hover */
+}
+#tagsList > div::before {
+    align-items: flex-end;
+    content: "";
+    background-image: url("Images/tag.svg");
+    background-repeat: no-repeat;
+    color: #1d1f20;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.125em 0.25em;
+    z-index: 1;
+    margin: 7px;
+}
+
+/*---------------Media-Queries---------------*/
+
+@media (max-width: 1540px) {
+    .notes-list-group {
+        max-height: 380px;
+    }
+}
+
+@media (max-width: 767px) {
+    .tagRow {
+        grid-template-columns: 30% 65%;
+    }
+    .tagRow span {
+        font-size: 1rem;
+    }
+    .list-header {
+        max-width: 60vw;
+    }
+
+    .notes-list-group {
+        max-height: 380px;
+    }
+}
+
+@media (max-width: 576px) {
+    .tagRow {
+        grid-template-columns: 1fr; /* Eine Spalte für kleinere Bildschirme */
+    }
+
+    .btn-container {
+        flex-direction: row; /* Buttons untereinander anordnen */
+    }
+    #tagsList > div::before, #tagsList > div::after {
+        height: 2.5rem;
+        width: 2.5rem;
+    }
+    #tagsList > div::before {
+        background-size: 70%;
+    }
+}

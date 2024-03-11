@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notizen Verwaltung</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet" href="list.css">
+    <link rel="stylesheet" href="modal.css">
+    <link rel="stylesheet" href="detailView.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">
+            <svg width="40" height="40" viewBox="0 0 602 605" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M169.854 559.003L135.184 58.4799C135.184 55.1502 137.926 52.4518 141.309 52.4518H180.759C185.041 52.4518 187.991 56.6494 186.5 60.5945L89.7043 230.549C89.3034 231.607 88.9666 235.757 89.1911 236.862L157.715 560.186C159.158 567.335 169.854 566.293 169.854 559.003Z" fill="white"/>
+                <path d="M438.207 564.289C426.709 564.289 419.365 557.677 413.896 549.25C413.64 548.872 413.431 548.461 413.239 548.035L324.67 348.539C321.911 342.338 312.899 342.543 310.445 348.871L214.644 560.218C213.505 563.153 210.651 565.094 207.46 565.094H194.582C190.333 565.094 186.901 561.701 186.901 557.535L201.189 60.6575C201.189 60.626 201.189 60.6102 201.189 60.5786C202.007 51.789 201.013 52.6569 206.385 52.3255C208.374 52.1992 210.202 52.0888 211.789 53.8089C217.546 60.0421 326.001 296.275 332.656 308.173C332.784 308.394 332.88 308.583 332.977 308.804L411.731 487.202C416.671 498.406 391.974 268.627 394.54 256.682L396.304 249.754C397.555 243.963 502.401 194.807 508.431 194.807C516.465 194.807 522.495 202.034 520.923 209.798C520.923 209.798 468.035 499.842 446.723 558.04C444.301 564.62 439.603 564.289 438.207 564.289Z" fill="white"/>
+                <path d="M5 383.856V5H597V600H150.787" stroke="white" stroke-width="10" stroke-miterlimit="10"/>
+            </svg><span> otes</span>
+        </a>
+        <div class="tabs">
+            <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <div class="nav-link active" id="pills-allNotes-tab" data-bs-toggle="pill" data-bs-target="#pills-allNotes" role="tab" aria-controls="pills-home" aria-selected="true">
+                        <i class="bi bi-pass"></i>
+                        <p class="text d-none d-sm-inline">Alle Notizen</p>
+                    </div>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <div class="nav-link" id="pills-archive-tab" data-bs-toggle="pill" data-bs-target="#pills-archive"role="tab" aria-controls="pills-profile" aria-selected="false">
+                        <i class="bi bi-archive"></i>
+                        <p class="text d-none d-sm-inline">Archiv</p>
+                    </div>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <div class="nav-link" id="pills-tags-tab" data-bs-toggle="pill" data-bs-target="#pills-tags" role="tab" aria-controls="pills-contact" aria-selected="false">
+                        <i class="bi bi-tag"></i>
+                        <p class="text d-none d-sm-inline">Tags</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="toggle">
+            <input type="checkbox" class="checkbox" id="lightDarkToggle">
+            <label for="lightDarkToggle" class="toggle-label">
+                <i class="bi bi-moon-fill"></i>
+                <i class="bi bi-sun-fill"></i>
+                <span class="ball"></span>
+            </label>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row listRow justify-content-center">
+            <div class="col-lg-7 tab-content" id="pills-tabContent">
+             <div class="tab-pane fade show active" id="pills-allNotes" role="tabpanel" aria-labelledby="pills-allNotes-tab" tabindex="0">
+                     <div class="text-center">
+                        <h3>Alle Notizen</h3>
+                    </div>
+                    <div class="row d-flex justify-content-evenly justify-content-sm-around my-3">
+                        <button id="add" title="Add new note" class="btn btn-primary">
+                            <i class="bi bi-plus"></i>
+                            <p class="text d-none d-sm-inline">Notiz hinzufügen</p>
+                        </button>
+                        <button id="filter" title="Filtere Notizen nach Priorität" class="btn btn-primary">
+                            <i class="bi bi-filter"></i>
+                            <p class="text d-none d-sm-inline">Priorität filtern</p>
+                        </button>
+                        <div id="noteCount">
+                            <p>Anzahl <i class="bi bi-pass"></i>: <span id="totalNotesCount">0</span></p>
+                        </div>
+                    </div>
+                 <div id="notelist" class="list-group notes-list-group my-3">
+
+                 </div>
+             </div>
+             <div class="tab-pane fade" id="pills-archive" role="tabpanel" aria-labelledby="pills-archive-tab" tabindex="0">
+                <div class="text-center">
+                    <h3>Alle Notizen in Archiv</h3>
+                </div>
+                <div class="row d-flex justify-content-around my-3">
+                    <button id="filterArchiv" title="Filter archivierte Notizen" class="btn btn-primary">
+                        <i class="bi bi-filter"></i>
+                        <p class="text d-none d-sm-inline">Priorität filtern</p>
+                    </button>
+                    <div id="archiveNoteCount">
+                        <p>Anzahl <i class="bi bi-archive"></i>: <span id="totalArchivedNotesCount">0</span></p>
+                    </div>
+                </div>
+                <div id="notelistArchiv" class="list-group notes-list-group my-3">
+
+                </div>
+            </div>
+             <div class="tab-pane fade" id="pills-tags" role="tabpanel" aria-labelledby="pills-tags-tab" tabindex="0">
+                <div class="text-center">
+                    <h3>Alle Tags</h3>
+                </div>
+                <div class="row d-flex justify-content-center my-3">
+                    <div id="tagsCount">
+                        <p>Anzahl <i class="bi bi-tags"></i>: <span id="totalTagsCount">0</span></p>
+                    </div>
+                </div>
+                <div id="tagsList" class="list-group tags-list-group my-3">
+
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-7 detailView d-none">
+                <div class="text-center">
+                    <h3>Detailansicht</h3>
+                </div>
+                <div class="detail-btnContainer d-flex justify-content-around my-3 flex-wrap">
+                    <button id="delete" title="Lösche ausgewählte Notiz" class="btn btn-primary">
+                        <i class="bi bi-trash"></i>
+                        <p class="text d-none d-sm-inline">Notiz löschen</p>
+                    </button>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-archive"></i>
+                            <p class="text d-none d-sm-inline">Archiv</p>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="archive">Archivieren</a></li>
+                            <li><a class="dropdown-item" href="#" id="rearchive">Rückarchivieren</a></li>
+                        </ul>
+                    </div>
+                    <button id="save" title="Bearbeite eine Notiz in der Detailansicht und klicke auf speichern" class="btn btn-primary">
+                        <i class="bi bi-floppy"></i>
+                        <p class="text d-none d-sm-inline">Notiz speichern</p>
+                    </button>
+                    <button id="addTag" title="Tag zur Notiz hinzufügen" class="btn btn-primary">
+                        + <i class="bi bi-tag"></i>
+                        <p class="text d-none d-sm-inline">Tag hinzufügen</p>
+                    </button>
+                    <button id="deleteTagFromNote" title="Tag von Notiz entfernen (Kann nur einen Tag löschen)" class="btn btn-primary">
+                        - <i class="bi bi-tag"></i>
+                        <p class="text d-none d-sm-inline">Tag entfernen</p>
+                    </button>
+                </div>
+                <div class="form-floating">
+                    <div class="note-background">
+                        <div class="form-div">
+                            <div class="inputDiv">
+                                <span id="headerinput" class="textarea" role="textbox" contenteditable></span>
+                            </div>
+                            <div class="priorityDiv d-flex">
+                                <p class="priorityText">Priorität: </p>
+                                <select id="priorityDropdown">
+                                    <option value="Hoch">Hoch</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Niedrig">Niedrig</option>
+                                </select></div>
+                        </div>
+                        <span id="noteinput" class="textarea" role="textbox" contenteditable></span>
+                        <div id="tagContainer" class="row mt-5 pb-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="fixed-bottom bg-dark text-light text-center py-2">
+        &copy; 2024 Notizen App by Ines Niedermaier
+    </footer>
+
+<!-- Bootstrap Modals -->
+<div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-div">
+                <h5 class="modal-title mt-3 text-center" id="noteModalLabel">Neue Notiz hinzufügen</h5>
+            </div>
+            <div class="modal-body">
+                <div class="inputbox mb-4">
+                    <label for="noteTitle" class="form-label"></label>
+                    <input type="text" class="form-control" id="noteTitle" required>
+                    <span>Titel</span>
+                </div>
+                <div class="inputbox">
+                    <label for="noteText" class="form-label"></label>
+                    <textarea class="form-control" id="noteText" rows="3" required></textarea>
+                    <span>Text</span>
+                </div>
+                <div class="priorityBox">
+                    <label for="notePriority" class="form-label">Priorität</label>
+                    <select class="form-select" id="notePriority">
+                        <option value="Hoch">Hoch</option>
+                        <option value="Normal" selected>Normal</option>
+                        <option value="Niedrig">Niedrig</option>
+                    </select>
+                </div>
+                <div class="existingTagsBox mb-3">
+                    <p class="mt-2 mb-3">Wähle einen vorhandenen Tag:</p>
+                    <div id="add-existingTags">
+                        <!-- Checkboxen für vorhandene Tags werden dynamisch hinzugefügt -->
+                    </div>
+                    <div class="newTagBox mt-3">
+                        <p class="mb-0">Neue Tags hinzufügen (durch Komma trennen): </p>
+                        <label for="newTag" class="form-label mb-3"></label>
+                        <input type="text" class="form-control" id="newTag">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="closeModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+                <button id="saveModal" type="button" class="btn btn-light">Speichern</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Tag Modal -->
+<div class="modal fade" id="tagModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="tagModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-div">
+                <h5 class="modal-title mt-3 text-center" id="tagModalLabel">Neuen Tag hinzufügen</h5>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Wähle einen vorhandenen Tag:</label>
+                    <div id="tag-existingTags">
+                        <!-- Checkboxen für vorhandene Tags werden dynamisch hinzugefügt -->
+                    </div>
+                </div>
+                <div class="newTagBox mb-3">
+                    <label for="newTag2" class="form-label">Neue Tags hinzufügen (durch Komma trennen):</label>
+                    <input type="text" class="form-control" id="newTag2">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="closeTagModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+                <button id="saveTagModal" type="button" class="btn btn-light">Speichern</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tag-Bearbeiten-Modal -->
+<div class="modal fade" id="tagEditModal" tabindex="-1" role="dialog" aria-labelledby="tagEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-div">
+                <h5 class="modal-title mt-3 text-center" id="tagEditModalLabel">Tag Bearbeiten</h5>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="editedTag">Bearbeiteter Tag </label>
+                    <input type="text" class="form-control" id="editedTag">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="closeEditTagModal" data-dismiss="modal">Schließen</button>
+                <button type="button" class="btn btn-light" id="saveEditTagModal">Speichern</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DeleteNote-Modal -->
+<div id="deleteNoteModal" class="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content p-5">
+            <div class="modal-div">
+                <h5 class="modal-title mb-3 text-center">Möchten Sie diese Notiz wirklich löschen?</h5>
+            </div>
+            <div class="model-body my-2 text-center">
+                <p>Gelöschte Notizen können nicht wieder hergestellt werden.</p>
+            </div>
+            <div class="model-footer d-flex justify-content-around">
+                <button type="button" class="btn btn-danger" id="confirmNoteDelete">Löschen</button>
+                <button type="button" class="btn btn-secondary" id="cancelNoteDelete">Abbrechen</button>
+            </div>
+    </div>
+    </div>
+</div>
+
+<!-- DeleteTag-Modal -->
+<div id="deleteTagModal" class="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content p-5">
+            <div class="modal-div">
+                <h5 class="modal-title mb-3 text-center">Möchten Sie diesen Tag wirklich löschen?</h5>
+            </div>
+            <div class="model-body">
+                <p>Gelöschte Tags können nicht wieder hergestellt werden.</p>
+            </div>
+            <div class="model-footer d-flex justify-content-around">
+                <button type="button" class="btn btn-danger" id="confirmTagDelete">Löschen</button>
+                <button type="button" class="btn btn-secondary" id="cancelTagDelete">Abbrechen</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- jQuery, Popper.js, Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

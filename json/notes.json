@@ -1,0 +1,25 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "title": "Einkaufsliste",
+      "description": "Milch, Eier, Brot, Obst",
+      "tags": ["Einkauf", "Lebensmittel"],
+      "priority": "Hoch"
+    },
+    {
+      "id": 2,
+      "title": "Meeting Notizen",
+      "description": "Besprechung mit dem Team über das neue Projekt.",
+      "tags": ["Meeting", "Projekt"],
+      "priority": "Niedrig"
+    },
+    {
+      "id": 3,
+      "title": "Urlaubsplanung",
+      "description": "Flug buchen, Hotel reservieren, Ausflüge planen.",
+      "tags": ["Urlaub", "Reise"],
+      "priority": "Normal"
+    }
+  ]
+}

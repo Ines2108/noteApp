@@ -1,0 +1,134 @@
+.modal-backdrop-shadow {
+  background-color: rgba(0, 0, 0, 0.2) !important; /* Hintergrundfarbe mit Transparenz */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Dropshadow-Effekt */
+  transition: all 1s ease; /* Übergangseffekte für Hintergrundfarbe und Schatten */
+}
+
+.modal {
+  color: var(--color-text);
+}
+
+.modal-content {
+  border: 2px solid black;
+  background: var(--color-primary);
+}
+
+.form-control:focus {
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 0.2rem var(--color-primary)
+}
+
+.modal-body {
+  position: relative;
+  padding: 30px 50px 0 50px;
+  background: var(--color-primary);
+  border-radius: 10px;
+}
+
+
+.modal-footer {
+  border-top: none;
+}
+
+.modal-body .inputbox {
+  position: relative;
+  height: 65px;
+  margin-bottom: 50px;
+}
+.modal-body .inputbox input, .modal-body .inputbox textarea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border: 2px solid #000;
+  outline: none;
+  background: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1.2em;
+  background: var(--color-background);
+}
+.modal-body .inputbox:last-child {
+  margin-bottom: 0;
+}
+.modal-body .inputbox span {
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  font-size: 1em;
+  transition: 0.6s;
+  font-family: sans-serif;
+}
+.modal-body .inputbox input:focus ~ span,
+.modal-body .inputbox input:valid ~ span,
+.modal-body .inputbox textarea:focus ~ span,
+.modal-body .inputbox textarea:valid ~ span
+{
+  transform: translateX(-13px) translateY(-40px);
+}
+
+.modal-body .priorityBox {
+  padding: 30px 0 10px 0;
+}
+
+.modal-body #add-existingTags, .modal-body #tag-existingTags {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.modal-body input {
+  border: 2px solid #000;
+  border-radius: 10px;
+}
+
+.selected {
+  background-color: white;
+  margin-right: -1px;
+}
+
+/*-------------Checkbox-------------*/
+
+/* Versteckt die Standard-Checkbox */
+.modal-body input[type="checkbox"] {
+  display: none;
+}
+
+/* Erstellt einen benutzerdefinierten Stil für die Checkbox */
+.modal-body input[type="checkbox"] + label {
+  position: relative;
+  padding-left: 25px; /* Platz für das benutzerdefinierte Häkchen */
+  cursor: pointer;
+}
+
+/* Stil für das benutzerdefinierte Häkchen */
+.modal-body input[type="checkbox"] + label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #000;
+  border-radius: 5px;
+  background-color: white;
+}
+
+/* Ändere die Farbe des benutzerdefinierten Häkchens, wenn die Checkbox aktiviert ist */
+.modal-body input[type="checkbox"]:checked + label::before {
+  background-color: var(--color-secondary)
+}
+
+.form-select {
+  padding: 7px;
+  border: 2px solid #000;
+  border-radius: 7px;
+
+}
+
+/*-------------Media-Queries-------------*/
+
+@media (max-width: 576px) {
+  .modal-body {
+    padding: 30px 15px;
+  }
+}

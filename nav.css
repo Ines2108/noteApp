@@ -1,0 +1,89 @@
+
+/*------- Tabs --------*/
+
+.nav-link.active {
+    background-color: unset !important;
+    border-bottom: 2px var(--color-primary) solid;
+}
+
+.nav-pills .nav-link {
+    border-radius: unset;
+    position: relative;
+    color: gray;
+}
+
+.nav-pills .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: width 0.3s ease;
+}
+
+.nav-pills .nav-link:hover {
+    cursor: pointer;
+    color: white;
+}
+
+.nav-pills .nav-link:hover::after {
+    width: 100%;
+}
+
+
+/*------- LightDarkToggle --------*/
+.toggle {
+    height: 36px;
+    width: 58px;
+    background-color: #555;
+    border-radius: 30px;
+    padding: 7px 10px 10px 10px;
+    position: relative;
+}
+
+#lightDarkToggle {
+    opacity: 0;
+    position: absolute;
+}
+
+.toggle-label-label {
+    background-color: #111;
+    width: 50px;
+    height: 26px;
+    border-radius: 50px;
+    position: relative;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bi-moon-fill {color: #f1c40f;}
+
+.bi-sun-fill {color: #f39c12;}
+
+.toggle-label .ball {
+    background-color: #fff;
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    right: 30px;
+    top: 7px;
+    border-radius: 50%;
+    transition: transform 0.2s linear;
+}
+
+#lightDarkToggle:checked + .toggle-label .ball {
+    transform: translateX(24px);
+}
+
+/*-------------Media-Queries-------------*/
+
+@media (max-width: 348px) {
+    .toggle {
+        margin: auto;
+    }
+}
